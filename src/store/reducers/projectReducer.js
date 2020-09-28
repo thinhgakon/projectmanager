@@ -11,9 +11,7 @@ const projectReducer = (state = initState, action) => {
         case 'CREATE_PROJECT':
             console.log('create project', action.project);
             break;
-        case 'TEST':
-            console.log('test');
-            break;
+
     }
     return state;
 };
