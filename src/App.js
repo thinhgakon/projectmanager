@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import Navbar from './components/layout/Navbar'
-import Dashboard from './components/dashboard/Dashboard'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Navbar from './components/layout/Navbar';
+import Dashboard from './components/dashboard/Dashboard';
+import ProjectDetails from './components/projects/ProjectDetails';
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
       <div className="App">
         <Navbar />
         <Switch>
-          <Route path='/' component={Dashboard} />
+          <Route exact path='/' component={Dashboard} />
+          <Route path='/project/:id' component={ProjectDetails} />
         </Switch>
       </div>
     </BrowserRouter>
