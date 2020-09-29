@@ -25,9 +25,8 @@ export const loadProject = () => {
             querySnapshot.forEach(function (doc) {
                 // doc.data() is never undefined for query doc snapshots
                 const project = {
-                    title: doc.data().title,
-                    content: doc.data().content,
-                    id: Math.ceil(Math.random(100, 200) * 100).toString()
+                    ...doc.data(),
+                    id: doc.id
                 }
                 arrProject.push(project);
             });
