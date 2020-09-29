@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProjectList from '../projects/ProjectList'
 import Notifications from './Notifications'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { loadProject } from '../../store/actions/projectActions'
 
 function Dashboard(props) {
     const projects = useSelector(state => state.project.projects);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        async function fetchProjectList() {
+            try {
+                dispatch(loadProject());
+            } catch (error) {
+                console.log("Failed to fetch:", error.message);
+            }
+        }
+        fetchProjectList();
+    }, []);
+
     return (
         <div className="dashboard container">
             <div className="row">
@@ -15,7 +29,7 @@ function Dashboard(props) {
                     <Notifications />
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
