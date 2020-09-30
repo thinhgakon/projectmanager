@@ -1,14 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useFirestoreConnect } from "react-redux-firebase";
 
 const ProjectDetails = (props) => {
   const id = props.match.params.id;
 
-  const projects = useSelector((state) => state.project.projects);
-  const projectIndex = projects.findIndex((project) => project.id == id);
-  const project = projects ? projects[projectIndex] : null;
+  useFirestoreConnect(['projects'])
+  const projects = useSelector((state) => state.firestore.data.projects);
+  const project = projects ? projects[id] : null;
 
-  console.log("project:", project);
   if (project) {
     return (
       <div className="container section project-details">
