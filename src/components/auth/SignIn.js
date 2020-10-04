@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { signIn } from "./../../store/actions/authActions";
 
 function SignIn(props) {
   const authError = useSelector((state) => state.auth.authError);
-  console.log("auth:", authError);
-
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const auth = useSelector(state => state.firebase.auth);
+  if (auth.uid) return <Redirect to='/' />
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -29,13 +31,14 @@ function SignIn(props) {
         <h5 className="grey-text text-darken-3">Sign In</h5>
         <div className="input-field">
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" onChange={handleChangeEmail} />
+          <input type="email" id="email" value={email} onChange={handleChangeEmail} />
         </div>
         <div className="input-field">
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
+            value={password}
             onChange={handleChangePassword}
           />
         </div>
