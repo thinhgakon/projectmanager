@@ -20,8 +20,6 @@ function SignIn(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("email:", email);
-    console.log("pass:", password);
     dispatch(signIn({ email, password }));
   };
 
