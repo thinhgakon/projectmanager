@@ -14,6 +14,7 @@ import "./config/fbConfig";
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import rootReducer from './store/reducers/rootReducer';
+import AuthIsLoaded from './components/auth/AuthIsLoaded';
 
 const store = createStore(rootReducer,
   compose(
@@ -31,7 +32,9 @@ const rrfProps = {
 ReactDOM.render(
   <Provider store={store} >
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <App />
+      <AuthIsLoaded>
+        <App />
+      </AuthIsLoaded>
     </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById('root')
