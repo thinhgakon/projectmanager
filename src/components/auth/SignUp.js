@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { signUp } from "./../../store/actions/authActions";
 
 function SignUp(props) {
+    const authError = useSelector((state) => state.auth.authError);
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -27,7 +30,10 @@ function SignUp(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        const newUser = {
+            email, password, firstName, lastName
+        }
+        dispatch(signUp(newUser));
     }
     return (
         <div className="container">
@@ -51,6 +57,9 @@ function SignUp(props) {
                 </div>
                 <div className="input-field">
                     <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
+                    <div className="red-text center">
+                        {authError ? <p>{authError}</p> : null}
+                    </div>
                 </div>
             </form>
         </div>
