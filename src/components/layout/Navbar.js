@@ -6,6 +6,7 @@ import SignedOutLinks from "./SignedOutLink";
 
 function Navbar(props) {
   const auth = useSelector(state => state.firebase.auth);
+  const profile = useSelector(state => state.firebase.profile);
   return (
     <nav className="nav-wrapper gret darken-3">
       <div className="container">
@@ -13,7 +14,7 @@ function Navbar(props) {
           MarioPlan
         </Link>
 
-        {auth.uid ? <SignedInLinks /> : <SignedOutLinks />}
+        {auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />}
 
       </div>
     </nav>
